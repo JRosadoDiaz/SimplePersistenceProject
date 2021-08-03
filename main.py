@@ -18,10 +18,10 @@ def display_interface():
 
         sel = input('Select an option: ')
         if sel == '1':
-            print('1 selected')
+            print('Viewing file information:\n')
             FileReader.PrintPeopleDetails(path)
         elif sel == '2':
-            print('2 selected')
+            print('Viewing employee data:\n')
             FileReader.PrintEmployees(path)
         elif sel == '0':
             print('Closing program.')
