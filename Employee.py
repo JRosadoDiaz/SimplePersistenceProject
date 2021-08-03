@@ -4,7 +4,7 @@ class Employee:
         self.employee_id = employee_id
         self.first_name = first_name
         self.last_name = last_name
-        self.hire_year = hire_year
+        self.hire_year = hire_year.replace("\n", "")
     
     def get_employee_id(self):
         return self.employee_id
@@ -29,3 +29,6 @@ class Employee:
 
     def set_employee_hire_year(self, year):
         self.hire_year = year
+
+    def toString(self):
+            print("ID: " + self.get_employee_id() + ", Name: " + self.get_employee_first_name() + " " + self.get_employee_last_name() + ", Hire Year: " + self.get_employee_hire_year())    
