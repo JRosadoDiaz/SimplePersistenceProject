@@ -7,7 +7,7 @@ employees = []
 filepath = "./people/long/"
 
 def PrintPeopleDetails():
-    for file in os.listdir("./Samples"):
+    for file in os.listdir(filepath):
         f = open(filepath + file, "r")
         print("FILE: " + file)
         print(f.read())
@@ -23,27 +23,27 @@ def AddEmployee(id, firstName, lastName, hireDate):
     f = open(filepath + id + ".txt", 'access_mode')
 
     #write parameter values to file
-    f.write(id + "," + firstName + "," + lastName + "," + hireDate)
+    f.write(id + ", " + firstName.upper() + ", " + lastName.upper() + ", " + hireDate)
 
     #close file
     f.close()
 
 def UpdateEmployee(id, firstName, lastName, hireDate):
     #locate file with id
-    f = open(filepath + "/" + id + ".txt", "w")
+    f = open(filepath + id + ".txt", "w")
 
     #rewrite contents of file
-    f.write(id + "," + firstName + "," + lastName + "," + hireDate)
+    f.write(id + ", " + firstName.upper() + ", " + lastName.upper() + ", " + hireDate)
 
     #close file
     f.close()
 
-def DeleteEmployees(id):
-    os.remove(filepath + "/" + id + ".txt")
+def DeleteEmployee(id):
+    os.remove(filepath + id + ".txt")
 
 def read_files(filepath):
     for file in os.listdir(filepath):
-        f = open(filepath + "/" + file, "r")
+        f = open(filepath + file, "r")
         lines = f.readlines()
         for x in lines:
             emp = x.split(",")
