@@ -6,7 +6,7 @@ def main():
     display_interface()
 
 def display_interface():
-    path = input('Please enter path to files:\n')
+    # path = input('Please enter path to files:\n')
 
     sel = ''
     while sel != '0':
@@ -22,34 +22,34 @@ def display_interface():
         sel = input('Select an option: ')
         if sel == '1':
             print('Viewing file information:\n')
-            FileReader.PrintPeopleDetails(path)
+            FileReader.PrintPeopleDetails()
         elif sel == '2':
             print('Viewing employee data:\n')
-            FileReader.PrintEmployees(path)
+            FileReader.PrintEmployees()
         elif sel == '3':
-            add_employee(path)
+            add_employee()
         elif sel == '4':
-            delete_employee(path)
+            delete_employee()
         elif sel == '5':
-            update_employee(path)
+            update_employee()
         elif sel == '6':
             serPath = input('Enter path to serialize files to:\n')
-            FileReader.SerializeAllEmployees(path, serPath)
+            FileReader.SerializeAllEmployees()
         elif sel == '7':
-            view_selected_employee(path)
+            view_selected_employee()
         elif sel == '0':
             print('Closing program.')
         else:
             print('Instructions unclear.')
 
-def add_employee(path):
+def add_employee():
     idExists = True
     selectedId = 0
     while idExists == True:
         selectedId = input('Enter ID to add or 0 to exit: ')
         if (selectedId == '0'):
             idExists = True
-        idExists = FileReader.check_id_exists(path, int(selectedId))
+        idExists = FileReader.check_id_exists('./people/long', int(selectedId))
         if (idExists == True):
             print('ID already exists, try another.')
     
@@ -58,16 +58,16 @@ def add_employee(path):
     firstName = input('Please enter the first name to add:\n')
     lastName = input('Please enter the last name to add:\n')
     hireDate = input('Please enter the hire year:\n')
-    FileReader.AddEmployee(path, selectedId, firstName, lastName, hireDate)
+    FileReader.AddEmployee(selectedId, firstName, lastName, hireDate)
 
-def update_employee(path):
+def update_employee():
     idExists = False
     selectedId = 0
     while idExists == False:
         selectedId = input('Enter ID to update or 0 to exit: ')
         if (selectedId == '0'):
             idExists = True
-        idExists = FileReader.check_id_exists(path, int(selectedId))
+        idExists = FileReader.check_id_exists('./people/long', int(selectedId))
         if (idExists == False):
             print('Failed to find ID, try another.')
     
@@ -76,16 +76,16 @@ def update_employee(path):
     firstName = input('Please enter updated first name:\n')
     lastName = input('Please enter updated last name:\n')
     hireDate = input('Please enter updated hire date:\n')
-    FileReader.UpdateEmployee(path, selectedId, firstName, lastName, hireDate)
+    FileReader.UpdateEmployee(selectedId, firstName, lastName, hireDate)
 
-def delete_employee(path):
+def delete_employee():
     idExists = False
     selectedId = 0
     while idExists == False:
         selectedId = input('Enter ID to delete or 0 to exit: ')
         if (selectedId == '0'):
             idExists = True
-        idExists = FileReader.check_id_exists(path, int(selectedId))
+        idExists = FileReader.check_id_exists('./people/long', int(selectedId))
         if (idExists == False):
             print('Failed to find ID, try another.')
     
@@ -93,16 +93,16 @@ def delete_employee(path):
         return
     else:
         x = 1
-        FileReader.DeleteEmployee(path, selectedId)
+        FileReader.DeleteEmployee(selectedId)
 
-def view_selected_employee(path):
+def view_selected_employee():
     idExists = False
     selectedId = 0
     while idExists == False:
         selectedId = input('Enter ID to delete or 0 to exit: ')
         if (selectedId == '0'):
             idExists = True
-        idExists = FileReader.check_id_exists(path, int(selectedId))
+        idExists = FileReader.check_id_exists('./people/long', int(selectedId))
         if (idExists == False):
             print('Failed to find ID, try another.')
     

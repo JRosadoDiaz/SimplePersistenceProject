@@ -3,36 +3,38 @@ from Employee import Employee
 
 employees = []
 
-def PrintPeopleDetails(filepath):
+def PrintPeopleDetails():
+    filepath = './people/long'
     for file in os.listdir(filepath):
         f = open(filepath + "/" + file, "r")
         print("FILE: " + file)
         print(f.read())
         print()
 
-def PrintEmployees(filepath):
-    read_files(filepath)
+def PrintEmployees():
+    read_files('./people/long')
     for x in employees:
         x.toString()
 
-def AddEmployee(filepath, id, firstName, lastName, hireDate):
+def AddEmployee(id, firstName, lastName, hireDate):
+    filepath = './people/long'
     with open(filepath + "/" + id + ".txt", "w") as f:
         f.write(id + ", " + firstName.upper() + ", " + lastName.upper() + ", " + hireDate)
 
-def DeleteEmployee(filepath, id):
-    os.remove(filepath + "/" + id + ".txt")
+def DeleteEmployee(id):
+    os.remove("./people/long/" + id + ".txt")
 
-def UpdateEmployee(filepath, id, firstName, lastName, hireDate):
-    with open(filepath + "/" + id + ".txt", "w") as f:
+def UpdateEmployee(id, firstName, lastName, hireDate):
+    with open("./people/long/" + id + ".txt", "w") as f:
         f.write(id + ", " + firstName.upper() + ", " + lastName.upper() + ", " + hireDate)
 
-def read_files(filepath):
+def read_files():
+    filepath = './people/long'
     for file in os.listdir(filepath):
         f = open(filepath + "/" + file, "r")
         lines = f.readlines()
         for x in lines:
             emp = x.split(",")
-            #print(emp)
             newEmployee = Employee(emp[0], emp[1], emp[2], emp[3])
             employees.append(newEmployee)
 
