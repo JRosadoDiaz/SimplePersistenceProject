@@ -10,7 +10,7 @@ def display_interface():
 
     sel = ''
     while sel != '0':
-        print('\n1 - View file contents')
+        print('1 - View file contents')
         print('2 - View employees from files')
         print('3 - Add Employee')
         print('4 - Delete Employee')
@@ -92,7 +92,6 @@ def delete_employee():
     if(selectedId == '0'):
         return
     else:
-        x = 1
         FileReader.DeleteEmployee(selectedId)
 
 def view_selected_employee():

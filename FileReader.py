@@ -17,8 +17,7 @@ def PrintEmployees():
         x.toString()
 
 def AddEmployee(id, firstName, lastName, hireDate):
-    filepath = './people/long'
-    with open(filepath + "/" + id + ".txt", "w") as f:
+    with open("./people/long" + id + ".txt", "w") as f:
         f.write(id + ", " + firstName.upper() + ", " + lastName.upper() + ", " + hireDate)
 
 def DeleteEmployee(id):
