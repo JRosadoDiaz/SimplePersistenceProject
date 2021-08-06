@@ -7,6 +7,7 @@ def main():
 
 def display_interface():
     # path = input('Please enter path to files:\n')
+    # FileReader.change_file_path(path)
 
     sel = ''
     while sel != '0':
@@ -33,7 +34,7 @@ def display_interface():
         elif sel == '5':
             update_employee()
         elif sel == '6':
-            serPath = input('Enter path to serialize files to:\n')
+            #serPath = input('Enter path to serialize files to:\n')
             FileReader.SerializeAllEmployees()
         elif sel == '7':
             view_selected_employee()
@@ -98,10 +99,10 @@ def view_selected_employee():
     idExists = False
     selectedId = 0
     while idExists == False:
-        selectedId = input('Enter ID to delete or 0 to exit: ')
+        selectedId = input('Enter ID to view or 0 to exit: ')
         if (selectedId == '0'):
             idExists = True
-        idExists = FileReader.check_id_exists('./people/long', int(selectedId))
+        idExists = FileReader.check_id_exists('./people/long serialized', int(selectedId))
         if (idExists == False):
             print('Failed to find ID, try another.')
     
@@ -109,7 +110,7 @@ def view_selected_employee():
         return
     else:
         x = 1
-        # FileReader.GetSerializedEmployee(int(selectedId))
+        FileReader.GetSerializedEmployee(int(selectedId))
 
 if __name__ == "__main__":
     main()
