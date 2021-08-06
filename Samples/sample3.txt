@@ -1,2 +1,0 @@
-1010,jose,rosado,2021
-1011,george,smith,2020
