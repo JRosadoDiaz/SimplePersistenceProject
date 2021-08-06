@@ -1,11 +1,13 @@
 import os
+import pickle
 from Employee import Employee
+
 
 employees = []
 
 def PrintPeopleDetails(filepath):
-    for file in os.listdir(filepath):
-        f = open(filepath + "/" + file, "r")
+    for file in os.listdir("./Samples"):
+        f = open("./Samples/" + file, "r")
         print("FILE: " + file)
         print(f.read())
         print()
@@ -37,6 +39,9 @@ def check_id_exists(filepath, id):
         if (id == thisNum):
             return True
     return False
+
+def SerializeAllEmployees(path, serPath):
+    print("Serializing all employees...")
 
 
 # def get_next_id(filepath):
