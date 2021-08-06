@@ -7,7 +7,7 @@ employees = []
 filepath = "./people/long/"
 
 def PrintPeopleDetails():
-    for file in os.listdir("./Samples"):
+    for file in os.listdir(filepath):
         f = open(filepath + file, "r")
         print("FILE: " + file)
         print(f.read())
@@ -20,7 +20,7 @@ def PrintEmployees():
 
 def AddEmployee(id, firstName, lastName, hireDate):
     #create a file
-    f = open(filepath + id + ".txt", 'access_mode')
+    f = open(filepath + id + ".txt", 'w')
 
     #write parameter values to file
     f.write(id + "," + firstName + "," + lastName + "," + hireDate)
@@ -41,6 +41,18 @@ def UpdateEmployee(id, firstName, lastName, hireDate):
 def DeleteEmployees(id):
     os.remove(filepath + "/" + id + ".txt")
 
+def SerializeAllEmployees(path, serPath):
+    print("Serializing all employees...")
+    # iterate through each file in people/long
+    for file in os.listdir(filepath):
+        serFile = open(filepath + "/" + file, "ab") # ab = appending in binary format
+        # use the pickle library to serlialize each file into 'people/long serialized'
+        pickle.dump(serFile, filepath + " serialized")
+        serFile.close()
+
+def GetSerializedEmployee(id):
+    # go to serialized folder and 
+
 def read_files(filepath):
     for file in os.listdir(filepath):
         f = open(filepath + "/" + file, "r")
@@ -58,8 +70,6 @@ def check_id_exists(filepath, id):
             return True
     return False
 
-def SerializeAllEmployees(path, serPath):
-    print("Serializing all employees...")
 
 
 
