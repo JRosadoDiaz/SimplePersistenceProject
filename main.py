@@ -43,11 +43,22 @@ def display_interface():
             print('Instructions unclear.')
 
 def add_employee(path):
+    idExists = True
+    selectedId = 0
+    while idExists == True:
+        selectedId = input('Enter ID to add or 0 to exit: ')
+        if (selectedId == '0'):
+            idExists = True
+        idExists = FileReader.check_id_exists(path, int(selectedId))
+        if (idExists == True):
+            print('ID already exists, try another.')
+    
+    if (selectedId == '0'):
+            return
     firstName = input('Please enter the first name to add:\n')
     lastName = input('Please enter the last name to add:\n')
     hireDate = input('Please enter the hire year:\n')
-    # print(FileReader.get_next_id(path)+1, firstName, lastName, hireDate)
-    # FileReader.AddEmployee(FileReader.get_next_id(path)+1, firstName, lastName, hireDate)
+    FileReader.AddEmployee(path, selectedId, firstName, lastName, hireDate)
 
 def update_employee(path):
     idExists = False
@@ -65,7 +76,7 @@ def update_employee(path):
     firstName = input('Please enter updated first name:\n')
     lastName = input('Please enter updated last name:\n')
     hireDate = input('Please enter updated hire date:\n')
-    # FileReader.UpdateEmployee(int(selectedId), firstName, lastName, hireDate)
+    FileReader.UpdateEmployee(path, selectedId, firstName, lastName, hireDate)
 
 def delete_employee(path):
     idExists = False
@@ -82,7 +93,7 @@ def delete_employee(path):
         return
     else:
         x = 1
-        # FileReader.DeleteEmployee(int(selectedId))
+        FileReader.DeleteEmployee(path, selectedId)
 
 def view_selected_employee(path):
     idExists = False

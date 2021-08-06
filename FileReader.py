@@ -15,11 +15,16 @@ def PrintEmployees(filepath):
     for x in employees:
         x.toString()
 
-def AddEmployee(id, firstName, lastName, hireDate):
-    #create a file
-    #write parameter values to file
-    #close file
-    x = 1
+def AddEmployee(filepath, id, firstName, lastName, hireDate):
+    with open(filepath + "/" + id + ".txt", "w") as f:
+        f.write(id + ", " + firstName.upper() + ", " + lastName.upper() + ", " + hireDate)
+
+def DeleteEmployee(filepath, id):
+    os.remove(filepath + "/" + id + ".txt")
+
+def UpdateEmployee(filepath, id, firstName, lastName, hireDate):
+    with open(filepath + "/" + id + ".txt", "w") as f:
+        f.write(id + ", " + firstName.upper() + ", " + lastName.upper() + ", " + hireDate)
 
 def read_files(filepath):
     for file in os.listdir(filepath):
@@ -39,16 +44,3 @@ def check_id_exists(filepath, id):
     return False
 
 
-# def get_next_id(filepath):
-#     thisNum = 0
-#     lastNum = 0
-
-    # doesn't work with default ascii sorting.
-
-    # for file in os.listdir(filepath):
-        # thisNum = int(file.split(".")[0])
-        # print(int(file.split('.')[0]))
-        # if (thisNum - 1 != lastNum):
-        #     return thisNum - 1
-        # lastNum = thisNum
-    #return thisNum + 1
