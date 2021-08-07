@@ -91,8 +91,14 @@ def check_id_exists(filepath, id):
             return True
     return False
 
+def PrintSerializedDetails(path):
+    print("hello")
 
+def GetAllEmployees(EmployeeMap):
+    print("Hello")
 
+def PrintAllEmployees():
+    print("Hello")
 
 # def get_next_id(filepath):
 #     thisNum = 0
