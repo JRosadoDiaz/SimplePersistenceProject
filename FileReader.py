@@ -23,23 +23,13 @@ def PrintEmployees():
         x.toString()
 
 def AddEmployee(id, firstName, lastName, hireDate):
-    #create a file
     f = open(filepath + "/" + id + ".txt", 'w')
-
-    #write parameter values to file
     f.write(id + ", " + firstName.upper() + ", " + lastName.upper() + ", " + hireDate)
-
-    #close file
     f.close()
 
 def UpdateEmployee(id, firstName, lastName, hireDate):
-    #locate file with id
     f = open(filepath + id + ".txt", "w")
-
-    #rewrite contents of file
     f.write(id + ", " + firstName.upper() + ", " + lastName.upper() + ", " + hireDate)
-
-    #close file
     f.close()
 
 def DeleteEmployee(id):
@@ -64,25 +54,46 @@ def SerializeAllEmployees():
 
     print("Done!")
 
-def GetSerializedEmployee(id):
-    print("Searching for employee with id " + str(id))
+def FindEmployeeById(id):
     # go to serialized folder and iterate over each file
     for file in os.listdir(filepath + " serialized"):
-        # once found, deserialize and return employee object too string
+        # once found, deserialize and return employee object to string
         if file == str(id) + ".ser":
             fileSer = open(filepath + " serialized/" + file, "rb")
             file = pickle.load(fileSer)
             print(file.toString())
 
-def read_files(filepath):
+def read_files():
     for file in os.listdir(filepath):
-        f = open(filepath + file, "r")
+        f = open(filepath + "/" + file, "r")
         lines = f.readlines()
         newEmployee = None
         for x in lines:
             emp = x.split(",")
             newEmployee = Employee(emp[0], emp[1], emp[2], emp[3])
         employees.append(newEmployee)
+
+def FindEmployeeByLastName(lastName):
+    for file in os.listdir(filepath):
+        f = open(filepath + "/" + file, "r")
+        lines = f.readlines()
+        for x in lines:
+            emp = x.split(", ")
+            if(emp[2] == lastName):
+                return Employee(emp[0], emp[1], emp[2], emp[3])
+    return 0
+
+def FindAllEmployeesByLastName(lastName):
+    returnedEmployees = []
+
+    for file in os.listdir(filepath):
+        f = open(filepath + "/" + file, "r")
+        lines = f.readlines()
+        for x in lines:
+            emp = x.split(", ")
+            if(emp[2] == lastName):
+                returnedEmployees.append(Employee(emp[0], emp[1], emp[2], emp[3]))
+    return returnedEmployees
 
 def check_id_exists(filepath, id):
     for file in os.listdir(filepath):
