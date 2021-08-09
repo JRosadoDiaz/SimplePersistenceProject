@@ -102,6 +102,22 @@ def check_id_exists(filepath, id):
             return True
     return False
 
+def PrintSerializedDetails(path): # Requires path to serialized files
+    for file in os.listdir(path):
+        serialized_employee = pickle.load(file)
+        print(serialized_employee.toString())
+
+def GetAllEmployees(path): # Requires path to serialized files
+    employee_list = {}
+    for file in os.listdir(path):
+        serialized_employee = pickle.load(file)
+        employee_list.update(serialized_employee.get_employee_id(), serialized_employee)
+    return employee_list
+
+def PrintAllEmployees(path): # Requires path to serialized files
+    employee_list = GetAllEmployees(path)
+    for employee in employee_list:
+        employee.toString()
 
 # def GetSerializedEmployee(id):
 #     print("Searching for employee with id " + str(id))
