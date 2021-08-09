@@ -1,5 +1,6 @@
 import os
 import pickle
+import datetime
 from Employee import Employee
 
 
@@ -11,16 +12,18 @@ def change_file_path(path):
     filepath = path
 
 def PrintPeopleDetails():
+    start_time = datetime.datetime.now()
     for file in os.listdir(filepath):
         f = open(filepath + "/" + file, "r")
-        print("FILE: " + file)
-        print(f.read())
-        print()
+        print("FILE: " + file + " -> " + f.read())
+    end_time = datetime.datetime.now()
+
+    time_convert(end_time - start_time)
 
 def PrintEmployees():
     read_files(filepath)
     for x in employees:
-        x.toString()
+        print(x.toString())
 
 def AddEmployee(id, firstName, lastName, hireDate):
     f = open(filepath + "/" + id + ".txt", 'w')
@@ -46,13 +49,17 @@ def SerializeAllEmployees():
         for x in lines:
             emp = x.split(",")
             newEmployee = Employee(emp[0], emp[1], emp[2], emp[3])
+        serFilePath = filepath + " serialized/"
+        
+        if not os.path.exists(serFilePath): # Check if folder exists
+            os.mkdir(serFilePath)
+
         # Create the new serialized file
-        serFilePath = filepath + " serialized/" + newEmployee.get_employee_id()
-        fser = open(serFilePath + ".ser", 'ab')
+        fser = open(serFilePath + newEmployee.get_employee_id() + ".ser", 'ab')
         pickle.dump(newEmployee, fser)
         fser.close()
 
-    print("Done!")
+    print("Done!\n")
 
 def FindEmployeeById(id):
     # go to serialized folder and iterate over each file
@@ -103,21 +110,31 @@ def check_id_exists(filepath, id):
     return False
 
 def PrintSerializedDetails(path): # Requires path to serialized files
+    start_time = datetime.datetime.now()
     for file in os.listdir(path):
-        serialized_employee = pickle.load(file)
+        fileSer = open(path + file, "rb")
+        serialized_employee = pickle.load(fileSer)
         print(serialized_employee.toString())
+    end_time = datetime.datetime.now()
+
+    time_convert(end_time - start_time)
 
 def GetAllEmployees(path): # Requires path to serialized files
+    print("Deserializing Employees...")
     employee_list = {}
     for file in os.listdir(path):
-        serialized_employee = pickle.load(file)
-        employee_list.update(serialized_employee.get_employee_id(), serialized_employee)
+        fileSer = open(path + file, "rb")
+        serialized_employee = pickle.load(fileSer)
+        employee_list.update({serialized_employee.get_employee_id() : serialized_employee})
     return employee_list
 
 def PrintAllEmployees(path): # Requires path to serialized files
     employee_list = GetAllEmployees(path)
-    for employee in employee_list:
-        employee.toString()
+    for id, employee in employee_list.items():
+        print(id + " -> " + employee.toString())
+
+def time_convert(sec):
+    print("Time Lapsed = {0} seconds : {1} milliseconds".format(sec.seconds,sec.microseconds))
 
 # def GetSerializedEmployee(id):
 #     print("Searching for employee with id " + str(id))
