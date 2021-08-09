@@ -115,19 +115,20 @@ def PrintSerializedDetails(path): # Requires path to serialized files
         f = open(path + file, 'rb')
         serialized_employee = pickle.load(f)
         print(serialized_employee.toString())
-        #f.close()
+        f.close()
     end_time = datetime.datetime.now()
 
     time_convert(end_time - start_time)
 
+employee_list = {}
 def GetAllEmployees(path): # Requires path to serialized files
     print("Deserializing Employees...")
-    employee_list = {}
-    for file in os.listdir(path):
-        f = open(path + file, 'rb')
-        serialized_employee = pickle.load(f)
-        f.close()
-        employee_list.update({serialized_employee.get_employee_id() : serialized_employee})
+    if len(employee_list) == 0:
+        for file in os.listdir(path):
+            f = open(path + file, 'rb')
+            serialized_employee = pickle.load(f)
+            f.close()
+            employee_list.update({serialized_employee.get_employee_id() : serialized_employee})
     return employee_list
 
 def PrintAllEmployees(path): # Requires path to serialized files
@@ -136,7 +137,7 @@ def PrintAllEmployees(path): # Requires path to serialized files
         print(id + " -> " + employee.toString())
 
 def time_convert(sec):
-    print("Time Lapsed = {0} seconds : {1} milliseconds".format(sec.seconds,sec.microseconds))
+    print("Time Lapsed = {0} seconds : {1} milliseconds".format(sec.seconds,sec.microseconds / 1000))
 
 # def GetSerializedEmployee(id):
 #     print("Searching for employee with id " + str(id))
