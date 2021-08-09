@@ -31,4 +31,4 @@ class Employee:
         self.hire_year = year
 
     def toString(self):
-            print("ID: " + self.get_employee_id() + ", Name: " + self.get_employee_first_name() + " " + self.get_employee_last_name() + ", Hire Year: " + self.get_employee_hire_year())    
+            return "ID: " + self.get_employee_id() + ", Name: " + self.get_employee_first_name() + " " + self.get_employee_last_name() + ", Hire Year: " + self.get_employee_hire_year()
