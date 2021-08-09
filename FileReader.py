@@ -104,18 +104,22 @@ def check_id_exists(filepath, id):
 
 def PrintSerializedDetails(path): # Requires path to serialized files
     for file in os.listdir(path):
-        serialized_employee = pickle.load(file)
+        f = open(path + "/" + file, 'r')
+        serialized_employee = pickle.load(f)
+        f.close()
         print(serialized_employee.toString())
 
 def GetAllEmployees(path): # Requires path to serialized files
     employee_list = {}
     for file in os.listdir(path):
-        serialized_employee = pickle.load(file)
+        f = open(path + "/" + file, 'r')
+        serialized_employee = pickle.load(f)
+        f.close()
         employee_list.update(serialized_employee.get_employee_id(), serialized_employee)
     return employee_list
 
-def PrintAllEmployees(path): # Requires path to serialized files
-    employee_list = GetAllEmployees(path)
+def PrintAllEmployees(): # Requires path to serialized files
+    employee_list = GetAllEmployees("./people/long serialized")
     for employee in employee_list:
         employee.toString()
 

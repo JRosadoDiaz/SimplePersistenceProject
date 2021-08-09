@@ -20,6 +20,8 @@ def display_interface():
         # print('2 - View Employee by ID')
         print('2 - Find Employee by ID')
         print('3 - Find Employees by Last Name')
+        print('4 - Print Serialized Details')
+        print('5 - Print All Employees')
         print('0 - Exit')
 
         sel = input('Select an option: ')
@@ -41,6 +43,10 @@ def display_interface():
             find_employee_by_id()
         elif sel == '3':
             find_by_last_name()
+        elif sel == '4':
+            FileReader.PrintSerializedDetails("./people/long serialized/")
+        elif sel == '4':
+            FileReader.PrintAllEmployees()
         elif sel == '0':
             print('Closing program.')
         else:
